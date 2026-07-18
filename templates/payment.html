@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+Complete Payment
+</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        IELTS Master
+    </div>
+
+
+</nav>
+
+
+
+<div class="payment-container">
+
+
+    <div class="payment-card">
+
+
+        <h1>
+            Complete Your Premium Upgrade 🚀
+        </h1>
+
+
+        <p class="payment-description">
+            Follow the instructions below to activate your IELTS Premium membership.
+        </p>
+
+
+
+        <div class="plan-box">
+
+
+            <h2>
+                Premium Plan
+            </h2>
+
+
+            <h3>
+                299 THB / month
+            </h3>
+
+
+            <p>
+                ✅ All IELTS Reading Tests
+            </p>
+
+            <p>
+                ✅ Listening Practice Tests
+            </p>
+
+            <p>
+                ✅ Detailed explanations
+            </p>
+
+
+        </div>
+
+
+
+
+        <div class="bank-box">
+
+
+            <h2>
+                Bank Transfer Details
+            </h2>
+
+
+            <p>
+                <strong>Bank:</strong>
+                Siam Commercial Bank (SCB)
+            </p>
+
+
+            <p>
+                <strong>Account Name:</strong>
+                Moe Aye Aye Myint
+            </p>
+
+
+            <p>
+                <strong>Account Number:</strong>
+                7072895459
+            </p>
+
+
+        </div>
+
+
+
+
+        <div class="upload-box">
+
+
+            <h2>
+                Upload Payment Slip
+            </h2>
+
+
+            <p>
+                After completing the transfer, upload your payment proof.
+            </p>
+
+
+
+            <form 
+            action="/upload-payment"
+            method="POST"
+            enctype="multipart/form-data"
+            >
+
+
+                <input 
+                type="file"
+                name="payment_slip"
+                required
+                >
+
+
+                <button type="submit">
+                    Submit Payment
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+</body>
+
+</html>

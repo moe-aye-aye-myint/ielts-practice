@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ test.title }}</title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- Timer -->
+
+<div class="timer">
+
+    Time Remaining:
+
+    <span id="timer">60:00</span>
+
+</div>
+
+
+
+
+
+<!-- Title -->
+
+<div class="test-title">
+
+    <h1>
+        {{ test.title }}
+    </h1>
+
+</div>
+
+
+
+
+
+<!-- Main Reading Area -->
+
+<div class="reading-layout">
+
+
+
+    <!-- LEFT SIDE: PASSAGE -->
+
+    <div class="passage">
+
+
+        {% for part in test.parts %}
+
+
+        <div 
+        class="passage-content"
+        id="passage-{{ part.part_number }}"
+        {% if part.part_number != 1 %}
+        style="display:none;"
+        {% endif %}
+        >
+
+
+            <h2>
+
+                Part {{ part.part_number }}:
+                {{ part.title }}
+
+            </h2>
+
+
+
+          {% for paragraph in part.passage %}
+
+
+<div class="paragraph">
+
+
+    {% if paragraph.label %}
+
+    <strong class="paragraph-label">
+
+        {{ paragraph.label }}
+
+    </strong>
+
+    {% endif %}
+
+
+
+    <p>
+
+        {{ paragraph.text }}
+
+    </p>
+
+
+</div>
+
+
+{% endfor %}
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- RIGHT SIDE: QUESTIONS -->
+
+    <div class="questions">
+
+
+        {% for part in test.parts %}
+
+
+        <div
+
+        class="question-content"
+
+        id="questions-{{ part.part_number }}"
+
+        {% if part.part_number != 1 %}
+
+        style="display:none;"
+
+        {% endif %}
+
+        >
+
+
+
+            <h2>
+
+                Part {{ part.part_number }}
+
+            </h2>
+
+
+
+
+
+            {% for q in part.questions %}
+
+
+            <div 
+            class="question"
+            id="question-{{ q.id }}"
+            data-marks="{{ q.marks if q.marks else 1 }}"
+            >   
+
+
+
+                {% if q.instruction %}
+
+<p class="instruction">
+
+    {{ q.instruction }}
+
+</p>
+
+{% endif %}
+
+
+
+<p>
+
+    <strong>
+
+        {{ q.id }}.
+        {{ q.question }}
+
+    </strong>
+
+</p>
+
+
+
+
+{% if q.type == "multiple_choice" %}
+
+
+{% for option in q.options %}
+
+<label>
+
+<input
+
+type="radio"
+
+name="question{{ q.id }}"
+
+value="{{ option }}"
+
+data-answer="{{ q.answer }}"
+
+>
+
+{{ option }}
+
+</label>
+
+<br>
+
+
+{% endfor %}
+
+{% elif q.type == "multiple_choice_multiple" %}
+
+
+{% for option in q.options %}
+
+<label>
+
+<input
+
+type="checkbox"
+
+name="question{{ q.display_number }}"
+
+value="{{ option[0] }}"
+
+data-answer="{{ q.answer | join(',') }}"
+
+>
+
+{{ option }}
+
+</label>
+
+<br>
+
+
+{% endfor %}
+
+{% elif q.type == "summary_completion" %}
+
+
+{% if q.title %}
+
+<h3 class="summary-title">
+
+{{ q.title }}
+
+</h3>
+
+{% endif %}
+
+
+
+<p class="instruction">
+
+{{ q.instruction }}
+
+</p>
+
+
+
+<div class="summary-box">
+
+{% for item in q.summary %}
+
+<p>
+
+<strong>{{ item.number }}.</strong>
+
+{{ item.text_before }}
+
+<input
+type="text"
+id="question-{{ item.number }}"
+class="answer-box"
+name="question{{ item.number }}"
+data-answer="{{ item.answer }}"
+>
+
+{{ item.text_after }}
+
+</p>
+
+{% endfor %}
+
+</div>
+
+{% elif q.type == "true_false_not_given" %}
+
+
+
+{% for option in q.options %}
+
+<label>
+
+<input
+
+type="radio"
+
+name="question{{ q.id }}"
+
+value="{{ option }}"
+
+data-answer="{{ q.answer }}"
+
+>
+
+{{ option }}
+
+</label>
+
+<br>
+
+
+{% endfor %}
+
+
+
+
+{% elif q.type == "yes_no_not_given" %}
+
+
+
+{% for option in q.options %}
+
+<label>
+
+<input
+
+type="radio"
+
+name="question{{ q.id }}"
+
+value="{{ option }}"
+
+data-answer="{{ q.answer }}"
+
+>
+
+{{ option }}
+
+</label>
+
+<br>
+
+
+{% endfor %}
+
+
+
+
+{% elif q.type == "sentence_completion" %}
+
+
+<input
+
+type="text"
+
+id="question-{{ q.id }}"
+
+class="answer-box"
+
+name="question{{ q.id }}"
+
+placeholder="Your answer"
+
+data-answer="{{ q.answer }}"
+
+>
+
+
+{% endif %}
+
+
+
+
+            </div>
+
+
+
+            {% endfor %}
+
+
+
+        </div>
+
+
+
+        {% endfor %}
+
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+<!-- Submit Button -->
+
+<div class="submit-container">
+
+    <button 
+    id="submit-test"
+    type="button"
+>
+    Submit Test
+</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+
+<script>
+
+
+function showPart(partNumber){
+
+
+    // Hide all passages
+
+    let passages = document.querySelectorAll(
+        ".passage-content"
+    );
+
+
+    passages.forEach(function(item){
+
+        item.style.display = "none";
+
+    });
+
+
+
+
+
+    // Hide all questions
+
+    let questions = document.querySelectorAll(
+        ".question-content"
+    );
+
+
+    questions.forEach(function(item){
+
+        item.style.display = "none";
+
+    });
+
+
+
+
+
+
+    // Show selected passage
+
+    document.getElementById(
+
+        "passage-" + partNumber
+
+    ).style.display = "block";
+
+
+
+
+
+
+    // Show selected questions
+
+    document.getElementById(
+
+        "questions-" + partNumber
+
+    ).style.display = "block";
+
+
+
+}
+
+function goToQuestion(questionNumber, partNumber){
+
+
+    // First switch to correct part
+
+    showPart(partNumber);
+
+
+
+    // Wait for display update
+
+    setTimeout(function(){
+
+
+        let question = document.getElementById(
+            "question-" + questionNumber
+        );
+
+
+
+        if(question){
+
+
+            question.scrollIntoView({
+
+                behavior:"smooth",
+
+                block:"center"
+
+            });
+
+
+
+        }
+
+
+
+    },100);
+
+
+
+}
+let answers = document.querySelectorAll(
+    'input[type="radio"], input[type="text"]'
+);
+
+
+
+answers.forEach(function(answer){
+
+
+    answer.addEventListener(
+        "change",
+        function(){
+
+
+
+            let questionNumber = this.name.replace(
+                "question",
+                ""
+            );
+
+
+
+            let button = document.getElementById(
+                "nav-" + questionNumber
+            );
+
+
+
+            if(button){
+
+                button.classList.add(
+                    "answered"
+                );
+
+            }
+
+
+        }
+    );
+
+
+});
+
+function submitTest(){
+
+    let confirmSubmit = confirm(
+        "Are you sure you want to submit your test?"
+    );
+
+    if(!confirmSubmit){
+
+        return;
+
+    }
+
+    calculateScore();
+
+}
+
+</script>
+
+<!-- Question Navigation -->
+
+<div class="question-navigation">
+
+
+    {% for part in test.parts %}
+
+        {% for q in part.questions %}
+
+
+        <button
+
+        class="question-number"
+
+        id="nav-{{ q.id }}"
+
+        onclick="goToQuestion({{ q.id }}, {{ part.part_number }})"
+
+        >
+
+        {{ q.id }}
+
+        </button>
+
+
+        {% endfor %}
+
+
+    {% endfor %}
+
+
+
+</div>
+
+
+</body>
+
+
+</html>

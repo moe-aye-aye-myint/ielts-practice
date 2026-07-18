@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Admin Dashboard
+</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+<div class="logo">
+IELTS Master Admin
+</div>
+
+</nav>
+
+
+
+<div class="admin-container">
+
+
+<h1>
+Welcome Admin 👑
+</h1>
+
+
+<p>
+Manage your IELTS platform here.
+</p>
+
+
+<div class="admin-card">
+
+<h2>
+Payment Requests
+</h2>
+
+<p>
+Review user payment proofs and approve premium accounts.
+</p>
+
+
+<table class="admin-table">
+
+
+<tr>
+
+<th>User ID</th>
+
+<th>Payment Slip</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+
+
+{% for payment in payments %}
+
+
+<tr>
+
+
+<td>
+{{ payment.user_id }}
+</td>
+
+
+
+<td>
+
+<img 
+src="/static/payment_slips/{{ payment.slip }}"
+width="200">
+
+</td>
+
+
+
+<td>
+{{ payment.status }}
+</td>
+
+
+
+<td>
+
+{% if payment.status == "pending" %}
+
+<a href="/approve-payment/{{ payment.id }}">
+Approve
+</a>
+
+
+{% else %}
+
+Approved ✅
+
+{% endif %}
+
+
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="admin-card">
+
+<h2>
+Users
+</h2>
+
+<p>
+Manage registered users.
+</p>
+
+
+<a href="#">
+View Users
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+</body>
+
+</html>

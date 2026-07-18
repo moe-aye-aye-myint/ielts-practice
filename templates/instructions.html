@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        IELTS Reading Instructions
+    </title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- Navigation Bar -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        IELTS Master
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/reading-test">Reading</a>
+
+        <a href="#">Listening</a>
+
+        <a href="#">Writing</a>
+
+        <a href="#">Speaking</a>
+
+    </div>
+
+
+</nav>
+
+
+
+
+
+<!-- Instructions Section -->
+
+<section class="instructions-container">
+
+
+    <h1>
+
+        {{ test.title }}
+
+    </h1>
+
+
+
+    <h2>
+
+        IELTS Academic Reading Test
+
+    </h2>
+
+
+
+
+    <div class="instruction-box">
+
+
+        <h3>
+            Instructions
+        </h3>
+
+
+        <ul>
+
+            <li>
+                The test contains 3 reading passages.
+            </li>
+
+
+            <li>
+                You have 60 minutes to complete the test.
+            </li>
+
+
+            <li>
+                There are 40 questions in total.
+            </li>
+
+
+            <li>
+                Answer all questions.
+            </li>
+
+
+            <li>
+                You can move between questions freely.
+            </li>
+
+
+            <li>
+                Your answers will be submitted automatically when the time ends.
+            </li>
+
+
+        </ul>
+
+
+    </div>
+
+
+
+
+
+    <div class="test-info">
+
+
+        <div class="info-card">
+
+            <h3>
+                Time
+            </h3>
+
+            <p>
+                60 minutes
+            </p>
+
+        </div>
+
+
+
+
+        <div class="info-card">
+
+            <h3>
+                Questions
+            </h3>
+
+            <p>
+                40 questions
+            </p>
+
+        </div>
+
+
+
+
+        <div class="info-card">
+
+            <h3>
+                Sections
+            </h3>
+
+            <p>
+                3 passages
+            </p>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- Start Button -->
+
+    <h2>
+Test ID: {{ test.id }}
+</h2>
+
+
+<a 
+href="/reading/{{ test.id }}"
+class="start-button"
+>
+    Start Test
+</a>
+
+
+</section>
+
+
+
+
+
+<footer>
+
+    © 2026 IELTS Master. Practice smarter.
+
+</footer>
+
+
+
+
+</body>
+
+</html>

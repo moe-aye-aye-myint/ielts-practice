@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+IELTS Reading Result
+</title>
+
+
+<link rel="stylesheet" 
+href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
+
+
+<body>
+
+
+<div class="result-container">
+
+
+<h1>
+Reading Test Result
+</h1>
+
+
+<h2>
+Score:
+{{score}} / {{total}}
+</h2>
+
+
+<h2>
+Estimated IELTS Band:
+{{band}}
+</h2>
+
+
+
+<h3>
+Answer Review
+</h3>
+
+
+{% for answer in answers %}
+
+
+<div class="review">
+
+
+<p>
+Question {{answer.id}}
+</p>
+
+
+<p>
+Your answer:
+{{answer.user_answer}}
+</p>
+
+
+<p>
+Correct answer:
+{{answer.correct_answer}}
+</p>
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+<a href="/">
+Return Home
+</a>
+
+
+</div>
+
+
+</body>
+
+</html>

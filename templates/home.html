@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IELTS Practice Platform</title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation Bar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            IELTS Master
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/reading-test">Reading</a>
+
+            <a href="#">Listening</a>
+
+            <a href="#">Writing</a>
+
+            <a href="#">Speaking</a>
+
+        </div>
+
+
+    </nav>
+
+<!-- Account Navigation -->
+
+<div class="account-bar">
+
+
+{% if current_user.is_authenticated %}
+
+<div class="user-info">
+
+    <span>
+        Hi {{ current_user.name }} 👋
+    </span>
+
+
+    {% if current_user.membership == "premium" %}
+    <span class="premium-badge">⭐ Premium Member</span>
+{% else %}
+    <a href="/upgrade" class="upgrade-btn">
+        Upgrade to Premium
+    </a>
+{% endif %}
+
+
+    <a href="/logout" class="logout-btn">
+        Logout
+    </a>
+
+</div>
+
+{% else %}
+
+    <a href="/login" class="login-btn">
+        Login
+    </a>
+
+
+    <a href="/register" class="register-btn">
+        Register
+    </a>
+
+{% endif %}
+
+
+</div>
+
+
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+
+        <div class="hero-content">
+
+
+            <h1>
+
+                Practice IELTS Like the Real Computer-Based Exam
+
+            </h1>
+
+
+
+            <p>
+
+                Improve your Reading, Listening, Writing, and Speaking skills with realistic IELTS practice tests.
+
+            </p>
+
+
+
+            <a href="/reading-test" class="start-button">
+
+                Start Reading Test
+
+            </a>
+
+
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+
+
+    <!-- Test Categories -->
+
+
+    <section class="categories">
+
+
+        <h2>
+
+            IELTS Practice Modules
+
+        </h2>
+
+
+
+
+        <div class="card-container">
+
+
+
+            <div class="test-card">
+
+
+                <h3>
+
+                    📖 Reading
+
+                </h3>
+
+
+                <p>
+
+                    Practice IELTS reading passages with a computer-based exam interface.
+
+                </p>
+
+
+                <a href="/reading-test">
+
+                    Start Practice
+
+                </a>
+
+
+            </div>
+
+
+
+
+
+            <div class="test-card">
+
+
+                <h3>
+
+                    🎧 Listening
+
+                </h3>
+
+
+                <p>
+
+                    Train your listening skills with IELTS-style audio questions.
+
+                </p>
+
+
+                <a href="#">
+
+                    Coming Soon
+
+                </a>
+
+
+            </div>
+
+
+
+
+
+            <div class="test-card">
+
+
+                <h3>
+
+                    ✍️ Writing
+
+                </h3>
+
+
+                <p>
+
+                    Practice Task 1 and Task 2 with sample answers.
+
+                </p>
+
+
+                <a href="#">
+
+                    Coming Soon
+
+                </a>
+
+
+            </div>
+
+
+
+
+
+            <div class="test-card">
+
+
+                <h3>
+
+                    🗣 Speaking
+
+                </h3>
+
+
+                <p>
+
+                    Practice IELTS Speaking Part 1, 2, and 3.
+
+                </p>
+
+
+                <a href="#">
+
+                    Coming Soon
+
+                </a>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <footer>
+
+        © 2026 IELTS Master. Practice smarter.
+
+    </footer>
+
+
+</body>
+
+</html>
