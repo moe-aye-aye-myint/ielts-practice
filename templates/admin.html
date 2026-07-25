@@ -152,12 +152,25 @@ Users
 {{ user.name }}
 </td>
 
+
 <td>
 {{ user.email }}
 </td>
 
+
 <td>
 {{ user.membership }}
+</td>
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+</div>
 
 {% for payment in payments %}
 
