@@ -128,22 +128,44 @@ Approved ✅
 </div>
 
 
-
 <div class="admin-card">
 
 <h2>
 Users
 </h2>
 
-<p>
-Manage registered users.
-</p>
+
+<table class="admin-table">
+
+<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Membership</th>
+</tr>
 
 
-<a href="#">
-View Users
-</a>
+{% for user in users %}
 
+<tr>
+
+<td>
+{{ user.name }}
+</td>
+
+<td>
+{{ user.email }}
+</td>
+
+<td>
+{{ user.membership }}
+</td>
+
+</tr>
+
+{% endfor %}
+
+
+</table>
 
 </div>
 

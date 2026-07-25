@@ -314,22 +314,24 @@ def upload_payment():
 
     file = request.files.get("payment_slip")
 
+    if not file:
+        return "No file uploaded"
 
-    if file:
 
-        filename = (
-            str(current_user.id)
-            + "_"
-            + file.filename
+    filename = (
+        str(current_user.id)
+        + "_"
+        + file.filename
+    )
+
+
+    file.save(
+        os.path.join(
+            app.config["UPLOAD_FOLDER"],
+            filename
         )
+    )
 
-
-        file.save(
-            os.path.join(
-                app.config["UPLOAD_FOLDER"],
-                filename
-            )
-        )
 
     payment = Payment(
         user_id=current_user.id,
@@ -339,13 +341,11 @@ def upload_payment():
 
 
     db.session.add(payment)
-
     db.session.commit()
+
 
     return "Payment submitted. Please wait for approval."
 
-
-    return "No file uploaded"
 
 @app.route("/approve-payment/<int:id>")
 @login_required
