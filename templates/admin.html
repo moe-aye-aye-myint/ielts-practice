@@ -158,6 +158,47 @@ Users
 
 <td>
 {{ user.membership }}
+
+{% for payment in payments %}
+
+<tr>
+
+<td>
+{{ payment.user.name }}
+</td>
+
+<td>
+{{ payment.user.email }}
+</td>
+
+<td>
+{{ payment.user.membership }}
+</td>
+
+<td>
+<img 
+src="/static/payment_slips/{{ payment.slip }}"
+width="200">
+</td>
+
+<td>
+{{ payment.status }}
+</td>
+
+<td>
+
+{% if payment.status == "pending" %}
+
+<a href="/approve-payment/{{ payment.id }}">
+Approve
+</a>
+
+{% else %}
+
+Approved ✅
+
+{% endif %}
+
 </td>
 
 </tr>

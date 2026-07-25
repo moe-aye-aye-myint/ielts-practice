@@ -344,7 +344,9 @@ def upload_payment():
     db.session.commit()
 
 
-    return "Payment submitted. Please wait for approval."
+    return render_template(
+    "payment_success.html"
+    )
 
 
 @app.route("/approve-payment/<int:id>")
