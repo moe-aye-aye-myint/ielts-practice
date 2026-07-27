@@ -12,7 +12,14 @@ app.config["UPLOAD_FOLDER"] = "static/payment_slips"
 
 app.config["SECRET_KEY"] = "replace_this_with_a_random_secret"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+import os
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///instance/database.db"
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
