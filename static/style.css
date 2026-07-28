@@ -1698,3 +1698,72 @@ Question Navigation
     background:#1d4ed8;
 
 }
+/* ===== Floating Annotation Toolbar ===== */
+
+#annotation-toolbar {
+    position: absolute;
+    display: none;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 8px;
+    z-index: 9999;
+    gap: 8px;
+    align-items: center;
+}
+
+#annotation-toolbar button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#annotation-toolbar button:hover {
+    background: #f3f3f3;
+}
+.highlight-yellow{
+    background:#fff59d;
+}
+
+.highlight-green{
+    background:#b9f6ca;
+}
+
+.highlight-pink{
+    background:#f8bbd0;
+}
+
+.highlight-blue{
+    background:#bbdefb;
+}
+
+.highlight-yellow,
+.highlight-green,
+.highlight-pink,
+.highlight-blue{
+    border-radius:3px;
+    padding:1px 0;
+}
+
+
+#reading-container {
+    position: relative;
+}
+
+
+#drawing-layer {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    z-index: 10;
+
+    pointer-events: none;
+
+}

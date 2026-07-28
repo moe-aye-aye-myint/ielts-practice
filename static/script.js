@@ -372,3 +372,352 @@ document
     submitTest
 );
 
+let savedRange = null;
+
+const toolbar = document.getElementById("annotation-toolbar");
+
+
+document.addEventListener("mouseup", function (e) {
+
+
+    // Ignore clicks on the toolbar itself
+    if (toolbar.contains(e.target)) {
+        return;
+    }
+
+
+    const selection = window.getSelection();
+
+
+    if (selection.toString().trim().length > 0) {
+
+
+        savedRange = selection.getRangeAt(0).cloneRange();
+
+
+        const rect = savedRange.getBoundingClientRect();
+
+
+        toolbar.style.display = "flex";
+
+
+        toolbar.style.left =
+        window.scrollX + rect.left + "px";
+
+
+        toolbar.style.top =
+        window.scrollY + rect.top - 55 + "px";
+
+
+    }
+
+});
+document.addEventListener("mousedown", function(e){
+
+    if(
+        !toolbar.contains(e.target)
+        &&
+        window.getSelection().toString().trim().length === 0
+    ){
+
+        toolbar.style.display="none";
+
+    }
+
+});
+document.querySelectorAll(".highlight-btn").forEach(button => {
+
+    button.addEventListener("click", function(){
+
+        if(!savedRange) return;
+
+        const color = this.dataset.color;
+
+        const span = document.createElement("span");
+
+        span.className = "highlight-" + color;
+
+        try{
+
+            savedRange.surroundContents(span);
+
+        }catch(err){
+
+            alert("Please select text inside one paragraph.");
+
+            return;
+
+        }
+
+        window.getSelection().removeAllRanges();
+
+        toolbar.style.display="none";
+
+        savedRange=null;
+
+    });
+
+});
+
+document.getElementById("remove-highlight-btn").addEventListener("click", function(){
+
+    const selection = window.getSelection();
+
+    if(selection.rangeCount === 0) return;
+
+    let node = selection.anchorNode;
+
+    if(node.nodeType === 3){
+        node = node.parentNode;
+    }
+
+    if(
+        node.classList &&
+        (
+            node.classList.contains("highlight-yellow") ||
+            node.classList.contains("highlight-green") ||
+            node.classList.contains("highlight-pink") ||
+            node.classList.contains("highlight-blue")
+        )
+    ){
+
+        const parent = node.parentNode;
+
+        while(node.firstChild){
+            parent.insertBefore(node.firstChild,node);
+        }
+
+        parent.removeChild(node);
+
+    }
+
+    toolbar.style.display="none";
+
+});
+
+const canvas = document.getElementById("drawing-layer");
+
+const ctx = canvas.getContext("2d");
+
+
+const container = document.getElementById("reading-container");
+
+
+function resizeCanvas(){
+
+    canvas.width = container.offsetWidth;
+
+    canvas.height = container.offsetHeight;
+
+}
+
+
+resizeCanvas();
+
+
+let drawing = false;
+let drawMode = false;
+
+let erasing = false;
+
+
+let history = [];
+
+let redoHistory = [];
+
+
+// Save current canvas state
+
+function saveState(){
+
+    history.push(
+        canvas.toDataURL()
+    );
+
+    redoHistory=[];
+
+}
+
+
+// Load canvas state
+
+function restoreState(image){
+
+    let img = new Image();
+
+    img.src=image;
+
+    img.onload=function(){
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        ctx.drawImage(img,0,0);
+
+    }
+
+}
+
+
+// Start drawing mode
+
+document.getElementById("draw-btn")
+.addEventListener("click",function(){
+
+    drawMode = true;
+
+    canvas.style.pointerEvents="auto";
+
+    erasing=false;
+
+    ctx.lineWidth=3;
+
+});
+canvas.addEventListener("mouseleave", function(){
+
+    drawing=false;
+
+});
+
+document.getElementById("done-drawing")
+.addEventListener("click", function(){
+
+    drawMode = false;
+
+    drawing = false;
+
+    canvas.style.pointerEvents="none";
+
+});
+
+// Eraser
+
+document.getElementById("eraser-btn")
+.addEventListener("click",function(){
+
+    canvas.style.pointerEvents="auto";
+
+    erasing=true;
+
+    ctx.lineWidth=20;
+
+});
+
+
+// Mouse down
+
+canvas.addEventListener("mousedown", function(e){
+
+    if(!drawMode) return;
+
+
+    saveState();
+
+
+    drawing = true;
+
+
+    const rect = canvas.getBoundingClientRect();
+
+
+    ctx.beginPath();
+
+
+    ctx.moveTo(
+        e.clientX - rect.left,
+        e.clientY - rect.top
+    );
+
+
+});
+
+
+// Draw
+
+canvas.addEventListener("mousemove", function(e){
+
+    if(!drawMode || !drawing) return;
+
+
+    const rect = canvas.getBoundingClientRect();
+
+
+    ctx.lineTo(
+        e.clientX - rect.left,
+        e.clientY - rect.top
+    );
+
+
+    ctx.stroke();
+
+
+});
+
+
+// Stop drawing
+
+canvas.addEventListener(
+"mouseup",
+function(){
+
+    drawing=false;
+
+});
+
+document.getElementById("undo-btn")
+.addEventListener("click",function(){
+
+    if(history.length===0)
+        return;
+
+
+    redoHistory.push(
+        canvas.toDataURL()
+    );
+
+
+    let previous =
+    history.pop();
+
+
+    restoreState(previous);
+
+});
+
+document.getElementById("redo-btn")
+.addEventListener("click",function(){
+
+    if(redoHistory.length===0)
+        return;
+
+
+    history.push(
+        canvas.toDataURL()
+    );
+
+
+    let next =
+    redoHistory.pop();
+
+
+    restoreState(next);
+
+});
+
+document.getElementById("clear-btn")
+.addEventListener("click",function(){
+
+    saveState();
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+});

@@ -54,59 +54,45 @@
 
     <!-- LEFT SIDE: PASSAGE -->
 
-    <div class="passage">
+<div class="passage" id="reading-container">
 
 
-        {% for part in test.parts %}
+    {% for part in test.parts %}
 
 
-        <div 
-        class="passage-content"
-        id="passage-{{ part.part_number }}"
-        {% if part.part_number != 1 %}
-        style="display:none;"
-        {% endif %}
-        >
-
-
-            <h2>
-
-                Part {{ part.part_number }}:
-                {{ part.title }}
-
-            </h2>
-
-
-
-          {% for paragraph in part.passage %}
-
-
-<div class="paragraph">
-
-
-    {% if paragraph.label %}
-
-    <strong class="paragraph-label">
-
-        {{ paragraph.label }}
-
-    </strong>
-
+    <div 
+    class="passage-content"
+    id="passage-{{ part.part_number }}"
+    {% if part.part_number != 1 %}
+    style="display:none;"
     {% endif %}
+    >
 
 
-
-    <p>
-
-        {{ paragraph.text }}
-
-    </p>
+        <h2>
+            Part {{ part.part_number }}:
+            {{ part.title }}
+        </h2>
 
 
-</div>
+        {% for paragraph in part.passage %}
 
 
-{% endfor %}
+        <div class="paragraph">
+
+
+            {% if paragraph.label %}
+
+            <strong class="paragraph-label">
+                {{ paragraph.label }}
+            </strong>
+
+            {% endif %}
+
+
+            <p>
+                {{ paragraph.text }}
+            </p>
 
 
         </div>
@@ -115,10 +101,17 @@
         {% endfor %}
 
 
-
     </div>
 
 
+    {% endfor %}
+
+
+    <!-- Drawing layer belongs inside passage -->
+    <canvas id="drawing-layer"></canvas>
+
+
+</div>
 
 
 
@@ -427,7 +420,23 @@ data-answer="{{ q.answer }}"
 
 </div>
 
+<div id="annotation-toolbar">
 
+    <button class="highlight-btn" data-color="yellow">🟨</button>
+    <button class="highlight-btn" data-color="green">🟩</button>
+    <button class="highlight-btn" data-color="pink">🩷</button>
+    <button class="highlight-btn" data-color="blue">🟦</button>
+
+    <button id="remove-highlight-btn">❌</button>
+
+    <button id="draw-btn">✏ Draw</button>
+    <button id="eraser-btn">🧽 Eraser</button>
+    <button id="undo-btn">↶ Undo</button>
+    <button id="redo-btn">↷ Redo</button>
+    <button id="clear-btn">🗑 Clear</button>
+    <button id="done-drawing">✅ Done</button>
+
+</div>
 
 
 
