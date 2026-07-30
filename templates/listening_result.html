@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>IELTS Listening Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="result-container">
+
+    <h1>Listening Test Result</h1>
+
+    <h2>Score: {{ score }} / {{ total }}</h2>
+
+    <h2>Estimated IELTS Band: {{ band }}</h2>
+
+    <h3>Answer Review</h3>
+
+    {% for answer in answers %}
+
+    <div class="review {% if answer.is_correct %}correct-review{% else %}wrong-review{% endif %}">
+
+        <p class="question-title">
+            <strong>Question {{ answer.id }}</strong>
+        </p>
+
+        <p>
+            <strong>Your answer:</strong>
+
+            {% if answer.user_answer %}
+
+                <span class="{% if answer.is_correct %}correct-answer{% else %}wrong-answer{% endif %}">
+                    {{ answer.user_answer }}
+                </span>
+
+            {% else %}
+
+                <span class="wrong-answer">
+                    No Answer
+                </span>
+
+            {% endif %}
+
+        </p>
+
+        <p>
+
+            <strong>Correct answer:</strong>
+
+            <span class="correct-answer">
+                {{ answer.correct_answer }}
+            </span>
+
+        </p>
+
+        {% if answer.is_correct %}
+
+        <p class="result-text correct-answer">
+            ✓ Correct
+        </p>
+
+        {% else %}
+
+        <p class="result-text wrong-answer">
+            ✗ Incorrect
+        </p>
+
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+    <a class="home-button" href="/">
+        Return Home
+    </a>
+
+</div>
+
+</body>
+
+</html>

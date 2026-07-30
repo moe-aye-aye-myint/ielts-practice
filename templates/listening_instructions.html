@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        IELTS Listening Instructions
+    </title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- Navigation Bar -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        IELTS Master
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/reading-test">Reading</a>
+
+        <a href="/listening-test">Listening</a>
+
+        <a href="#">Writing</a>
+
+        <a href="#">Speaking</a>
+
+    </div>
+
+
+</nav>
+
+
+
+
+
+<!-- Instructions Section -->
+
+<section class="instructions-container">
+
+
+    <h1>
+
+        {{ test.title }}
+
+    </h1>
+
+
+
+    <h2>
+
+        IELTS Academic Listening Test
+
+    </h2>
+
+
+
+
+    <div class="instruction-box">
+
+
+        <h3>
+            Instructions
+        </h3>
+
+
+        <ul>
+
+            <li>
+                The test contains 4 listening parts.
+            </li>
+
+
+            <li>
+                You will hear the recording only once.
+            </li>
+
+            <li>
+                You need to click the audio button on the test page in order to start the audio. However, in real IELTS exam, the audio will start automatically after you click start test. 
+            </li>
+
+            <li>
+                The recording cannot be stopped once started the test.
+            </li>
+
+            <li>
+                There are 40 questions in total; 10 questions each for Part 1,2,3, and 4.
+            </li>
+
+
+            <li>
+                Type your answers carefully and check spelling.
+            </li>
+
+
+            <li>
+                You can move between questions freely.
+            </li>
+
+
+            <li>
+                Your answers will be submitted automatically when the time ends.
+            </li>
+
+
+        </ul>
+
+
+    </div>
+
+
+
+
+
+    <div class="test-info">
+
+
+        <div class="info-card">
+
+            <h3>
+                Time
+            </h3>
+
+            <p>
+                30 minutes
+            </p>
+
+        </div>
+
+
+
+
+        <div class="info-card">
+
+            <h3>
+                Questions
+            </h3>
+
+            <p>
+                40 questions
+            </p>
+
+        </div>
+
+
+
+
+        <div class="info-card">
+
+            <h3>
+                Sections
+            </h3>
+
+            <p>
+                4 parts
+            </p>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- Start Button -->
+
+    <h2>
+Test ID: {{ test.id }}
+</h2>
+
+
+<a 
+href="/listening/{{ test.id }}?autoplay=true"
+class="start-button">
+
+Start Test
+
+</a>
+
+
+</section>
+
+
+
+
+
+<footer>
+
+    © 2026 IELTS Master. Practice smarter.
+
+</footer>
+
+
+
+
+</body>
+
+</html>

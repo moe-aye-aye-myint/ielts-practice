@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+IELTS Listening Test
+</title>
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+
+<body>
+
+
+<!-- Navigation Bar -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        IELTS Master
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/reading-test">
+            Reading
+        </a>
+
+        <a href="/listening-test">
+            Listening
+        </a>
+
+        <a href="#">
+            Writing
+        </a>
+
+        <a href="#">
+            Speaking
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+
+<section class="listening-test-container">
+
+
+<!-- HEADER -->
+
+<div class="test-header">
+
+<h1>
+{{ test.title }}
+</h1>
+
+<p>
+Listening Test
+</p>
+
+</div>
+
+
+
+
+<!-- AUDIO AREA -->
+
+
+<div class="audio-section">
+
+
+<button 
+type="button"
+id="start-audio-btn"
+class="start-button"
+onclick="startAudio()">
+
+🎧 Start Listening Test
+
+</button>
+
+
+
+<audio 
+id="listening-audio"
+preload="auto">
+
+
+<source
+src="{{ url_for('static', filename='audio/' + test.audio) }}"
+type="audio/mpeg">
+
+
+</audio>
+
+
+
+<p id="audio-status">
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- FORM -->
+
+<form
+id="listening-form"
+action="/submit-listening/{{ test.id }}"
+method="POST">
+
+
+
+<!-- QUESTION AREA -->
+
+<div class="question-area">
+
+
+{% for part in test.parts %}
+
+
+<div
+class="part-section"
+id="part-{{ part.part }}"
+{% if part.part != 1 %}
+style="display:none;"
+{% endif %}
+>
+
+
+<h2>
+Part {{ part.part }}
+</h2>
+
+
+<p class="instruction">
+{{ part.instruction }}
+</p>
+
+
+
+{% if part.type == "table" %}
+
+
+<!-- TABLE QUESTIONS -->
+
+<table class="listening-table">
+
+<tr>
+
+{% for header in part.content.headers %}
+
+<th>
+{{ header }}
+</th>
+
+{% endfor %}
+
+</tr>
+
+
+
+{% for row in part.content.rows %}
+
+<tr>
+
+{% for cell in row %}
+
+<td>
+
+
+{% if cell.content %}
+
+
+{% for item in cell.content %}
+
+
+{% if item.question %}
+
+<strong>
+{{ item.question }}.
+</strong>
+
+<input
+type="text"
+class="table-input"
+id="question-{{ item.question }}"
+name="question_{{ item.question }}"
+>
+
+
+{% else %}
+
+{{ item.text }}
+
+{% endif %}
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+{{ cell.text }}
+
+
+{% endif %}
+
+
+</td>
+
+{% endfor %}
+
+</tr>
+
+{% endfor %}
+
+
+</table>
+
+
+
+{% elif part.type == "formatted_summary" %}
+
+
+
+<!-- SUMMARY QUESTIONS -->
+
+
+<div class="formatted-summary">
+
+
+{% for section in part.content %}
+
+
+
+{% if section.type == "heading" %}
+
+
+<h3>
+{{ section.text }}
+</h3>
+
+
+
+{% elif section.type == "subheading" %}
+
+
+<h4>
+{{ section.text }}
+</h4>
+
+
+
+{% elif section.type == "bullet" or section.type == "sub_bullet" %}
+
+
+<ul>
+
+
+{% for bullet in section["items"] %}
+
+<li>
+
+
+{% for item in bullet %}
+
+
+{% if item.question %}
+
+
+<strong>
+{{ item.question }}.
+</strong>
+
+
+<input
+type="text"
+class="summary-input"
+name="question_{{ item.question }}"
+id="question-{{ item.question }}"
+>
+
+
+{% else %}
+
+{{ item }}
+
+{% endif %}
+
+
+
+{% endfor %}
+
+
+</li>
+
+
+{% endfor %}
+
+
+</ul>
+
+
+
+{% endif %}
+
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+
+
+{% elif part.type == "multiple_choice" %}
+
+
+
+<!-- MULTIPLE CHOICE QUESTIONS -->
+
+
+{% for q in part.questions %}
+
+
+<div
+class="question"
+id="question-{{ q.display_number }}"
+>
+
+
+<p>
+
+<strong>
+{{ q.display_number }}.
+{{ q.question }}
+</strong>
+
+</p>
+
+
+
+{% if q.type == "multiple_choice_multiple" %}
+
+
+<p class="instruction">
+{{ q.instruction }}
+</p>
+
+
+
+{% for option in q.options %}
+
+
+<label>
+
+
+<input
+type="checkbox"
+name="question_{{ q.numbers[0] }}-{{ q.numbers[1] }}"
+value="{{ option.split('.')[0] }}"
+>
+
+
+{{ option }}
+
+
+</label>
+
+
+<br>
+
+
+{% endfor %}
+
+
+
+
+
+{% else %}
+
+
+
+{% for option in q.options %}
+
+
+<label>
+
+
+<input
+type="radio"
+name="question_{{ q.number }}"
+value="{{ option.split('.')[0] }}"
+>
+
+
+{{ option }}
+
+
+</label>
+
+
+<br>
+
+
+{% endfor %}
+
+
+
+
+{% endif %}
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+{% endif %}
+
+
+
+</div>
+
+
+{% endfor %}
+
+
+<!-- BOTTOM CONTROL PANEL -->
+
+
+<div class="bottom-panel">
+
+
+<div class="submit-area">
+
+<button
+type="submit"
+class="submit-button">
+
+Submit Test
+
+</button>
+
+</div>
+
+
+<!-- QUESTION NAVIGATION -->
+
+<div class="question-navigation">
+
+
+{% for part in test.parts %}
+
+
+
+{% if part.type == "table" %}
+
+
+    {% for row in part.content.rows %}
+
+        {% for cell in row %}
+
+            {% if cell.content %}
+
+                {% for item in cell.content %}
+
+                    {% if item.question %}
+
+                    <button
+                    type="button"
+                    class="question-number"
+                    id="nav-{{ item.question }}"
+                    onclick="goToQuestion('{{ item.question }}', {{ part.part }})">
+
+                    {{ item.question }}
+
+                    </button>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endfor %}
+
+
+
+
+
+{% elif part.type == "formatted_summary" %}
+
+    {% for section in part.content %}
+
+
+        {% if section.type == "paragraph" %}
+
+            {% for item in section.text %}
+
+                {% if item.question %}
+
+                    <button
+                    type="button"
+                    class="question-number"
+                    id="nav-{{ item.question }}"
+                    onclick="goToQuestion('{{ item.question }}', {{ part.part }})">
+
+                    {{ item.question }}
+
+                    </button>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+
+        {% elif section.type == "bullet" or section.type == "sub_bullet" %}
+
+
+            {% for bullet in section["items"] %}
+
+                {% for item in bullet %}
+
+                    {% if item.question %}
+
+                        <button
+                        type="button"
+                        class="question-number"
+                        id="nav-{{ item.question }}"
+                        onclick="goToQuestion('{{ item.question }}', {{ part.part }})">
+
+                        {{ item.question }}
+
+                        </button>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endfor %}
+
+
+        {% endif %}
+
+
+    {% endfor %}
+
+
+
+
+
+
+{% elif part.type == "multiple_choice" %}
+
+
+
+    {% for q in part.questions %}
+
+
+    <button
+    type="button"
+    class="question-number"
+    id="nav-{{ q.display_number }}"
+    onclick="goToQuestion('{{ q.display_number }}', {{ part.part }})">
+
+    {{ q.display_number }}
+
+    </button>
+
+
+    {% endfor %}
+
+
+
+{% endif %}
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+</div>
+
+
+
+</form>
+
+
+
+</section>
+
+
+<script src="{{ url_for('static', filename='listening.js') }}"></script>
+
+
+</body>
+
+
+</html>

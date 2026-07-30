@@ -1,0 +1,809 @@
+{
+    "id": "listening_test1",
+    "title": "Listening Test 1",
+    "audio": "listening_test_1.mp3",
+
+
+    "parts": [
+
+        {
+            "part": 1,
+
+            "instruction": "Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.",
+
+
+            "type": "table",
+
+
+            "content": {
+
+                "headers": [
+                    "Name of restaurant",
+                    "Location",
+                    "Reason for recommendation",
+                    "Other comments"
+                ],
+
+
+                "rows": [
+
+                    [
+                        {
+                            "text": "The Junction"
+                        },
+                        {
+                            "text": "Greyson Street, near the station"
+                        },
+
+                        {
+                            "content": [
+                                {
+                                    "text": "Good for people who are especially keen on"
+                                },
+                                {
+                                    "question": 1
+                                }
+                            ]
+                        },
+
+                        {
+                            "content": [
+                                {
+                                    "text": "Quite expensive. The "
+                                },
+                                {
+                                    "question": 2
+                                },
+                                {
+                                    "text": " is a good place for a drink"
+                                }
+                            ]
+                        }
+
+                    ],
+
+                    [
+                        {
+                            "text": "Paloma"
+                        },
+                        {
+                            "text": "In Bow Street next to the cinema"
+                        },
+
+                        {
+                            "content": [
+                                
+                                {
+                                    "question": 3
+                                },
+                                {
+                                    "text": " Food, good for sharing"
+                                }
+                            ]
+                        },
+                        {
+                            "content": [
+                                {
+                                    "text": "Staff are very friendly. Need to pay €50 deposit. A limited selection of  "
+                                },
+                                {
+                                    "question": 4
+                                },
+                                {
+                                    "text": " Food on the menu"
+                                }
+                            ]
+                        }
+
+                    ],
+                    [
+
+                        {
+                            "content": [
+                                {
+                                    "text": "The "
+                                },
+                                {
+                                    "question": 5
+                                }
+                                
+                            ]
+                        },
+                        {
+                            "content": [
+                                {
+                                    "text": "At the top of a "
+                                },
+                                {
+                                    "question": 6
+                                }
+                                
+                            ]
+                        },
+                        {
+                            "content": [
+                                {
+                                    "text": "A famous chef. All the "
+                                },
+                                {
+                                    "question": 7
+                                },
+                                {
+                                    "text": " are very good. Only uses "
+                                },
+                                {
+                                    "question": 8
+                                },
+                                {
+                                    "text": " ingredients"
+                                }
+                            ]
+                        },
+                        {
+                            "content": [
+                                {
+                                    "text": "Set lunch costs "
+                                },
+                                {
+                                    "question": 9
+                                },
+                                {
+                                    "text": " per person. Portions probably of "
+                                },
+                                {
+                                    "question": 10
+                                },
+                                {
+                                    "text": " size"
+                                }
+                            ]
+                        }
+
+                    ]
+                    
+
+                ],
+                "answers": [
+
+                    {
+                        "number": 1,
+                        "answer": "fish"
+                    },
+
+                    {
+                        "number": 2,
+                        "answer": "roof"
+                    },
+
+                    {
+                        "number": 3,
+                        "answer": "Spanish"
+                    },
+
+                    {
+                        "number": 4,
+                        "answer": "vegetarians"
+                    },
+                    {
+                        "number": 5,
+                        "answer": "Audley"
+                    },
+                    {
+                        "number": 6,
+                        "answer": "hotel"
+                    },
+                    {
+                        "number": 7,
+                        "answer": "reviews"
+                    },
+                    {
+                        "number": 8,
+                        "answer": "local"
+                    },
+                    {
+                        "number": 9,
+                        "answer": "thirty"
+                    },
+                    {
+                        "number": 10,
+                        "answer": "average"
+                    }
+
+                ],
+
+                "marks": 10
+
+            }
+
+        },
+
+
+        {
+            "part": 2,
+
+            "type": "multiple_choice",
+
+            "instruction": "Choose the correct letter, A, B or C.",
+
+            "questions": [
+
+                {
+                    "number": 11,
+
+                    "display_number": "11",                 
+
+                    "question": "Heather says pottery differs from other art forms because",
+
+                    "options": [
+                        "A. it lasts longer in the ground.",
+                        "B. it is practised by more people.",
+                        "C. it can be repaired more easily."
+                    ],
+
+                    "answer": "A",
+
+                    "marks": 1
+
+                },
+                {
+                    "number": 12,
+
+                    "display_number": "12",
+
+                    "type": "multiple_choice",
+
+                    "question": "Archaeologists sometimes identify the use of ancient pottery from",
+
+                    "options": [
+                        "A. the clay it was made with.",
+                        "B. the marks that are on it.",
+                        "C. the basic shape of it."
+                    ],
+
+                    "answer": "B",
+
+                    "marks": 1
+
+                },
+                {
+                    "number": 13,
+
+                    "display_number": "13",
+
+                    "type": "multiple_choice",
+
+                    "question": "Some people join Heather's pottery class because they want to",
+
+                    "options": [
+                        "A. create an item that looks very old.",
+                        "B. find something that they are good at.",
+                        "C. make something that will outlive them."
+                    ],
+
+                    "answer": "C",
+
+                    "marks": 1
+
+                },
+                {
+                    "number": 14,
+
+                    "display_number": "14",
+
+                    "type": "multiple_choice",
+
+                    "question": "What does Heather value most about being a potter?",
+
+                    "options": [
+                        "A. its calming effect",
+                        "B. its messy nature",
+                        "C. its physical benefits"
+                    ],
+
+                    "answer": "A",
+
+                    "marks": 1
+
+                },
+                {
+                    "number": 15,
+
+                    "display_number": "15",
+
+                    "type": "multiple_choice",
+
+                    "question": "Most of the visitors to Edelman Pottery",
+
+                    "options": [
+                        "A. bring friends to join courses.",
+                        "B. have never made a pot before.",
+                        "C. try to learn techniques too quickly."
+                    ],
+
+                    "answer": "B",
+
+                    "marks": 1
+
+                },
+                {
+                    "number": 16,
+
+                    "display_number": "16",
+
+                    "type": "multiple_choice",
+
+                    "question": "Heather reminds her visitors that they should",
+
+                    "options": [
+                        "A. put on their aprons.",
+                        "B. change their clothes.",
+                        "C. take off their jewellery."
+                    ],
+
+                    "answer": "C",
+
+                    "marks": 1
+
+                },
+                {
+                    "numbers": [17, 18],
+
+                    "display_number": "17-18",
+
+                    "type": "multiple_choice_multiple",
+
+                    "question": "Which TWO of the things does Heather explain about kilns?",
+
+                    "instruction": "Choose TWO letters, A-E.",
+
+                    "options": [
+                        "A. what their function is",
+                        "B. when they were invented",
+                        "C. ways of keeping them safe",
+                        "D. where to put one in your home",
+                        "E. what some people use instead of one"
+                    ],
+
+                    "answer": [
+                        "A",
+                        "E"
+                    ],
+
+                    "marks": 2
+                },
+                {
+                    "numbers": [19, 20],
+
+                    "display_number": "19-20",
+
+                    "type": "multiple_choice_multiple",
+
+                    "question": "Which TWO points does Heather make about a potter's tools?",
+
+                    "instruction": "Choose TWO letters, A-E.",
+
+                    "options": [
+                        "A. Some are hard to hold.",
+                        "B. Some are worth buying.",
+                        "C. Some are essential items.",
+                        "D. Some have memorable names.",
+                        "E. Some are available for use by participants."
+                    ],
+
+                    "answer": [
+                        "C",
+                        "E"
+                    ],
+
+                    "marks": 2
+                }
+            ]
+        },
+        {
+            "part": 3,
+
+            "type": "multiple_choice",
+
+            "questions": [
+                {
+                    "numbers": [21, 22],
+
+                    "display_number": "21-22",
+
+                    "type": "multiple_choice_multiple",
+
+                    "question": "Which TWO things do the students both believe are responsible for the increase in loneliness?",
+
+                    "instruction": "Choose TWO letters, A-E.",
+
+                    "options": [
+                        "A. social media",
+                        "B. smaller nuclear families",
+                        "C. urban design",
+                        "D. longer lifespans",
+                        "E. a mobile workforce"
+                    ],
+
+                    "answer": [
+                        "C",
+                        "E"
+                    ],
+
+                    "marks": 2
+                },
+                {
+                    "numbers": [23, 24],
+
+                    "display_number": "23-24",
+
+                    "type": "multiple_choice_multiple",
+
+                    "question": "Which TWO health risks associated with loneliness do the students agree are based on solid evidence?",
+
+                    "instruction": "Choose TWO letters, A-E.",
+
+                    "options": [
+                        "A. a weakened immune system",
+                        "B. dementia",
+                        "C. cancer",
+                        "D. obesity",
+                        "E. cardiovascular disease"
+                    ],
+
+                    "answer": [
+                        "A",
+                        "C"
+                    ],
+
+                    "marks": 2
+                },
+                {
+                    "numbers": [25, 26],
+
+                    "display_number": "25-26",
+
+                    "type": "multiple_choice_multiple",
+
+                    "question": "Which TWO opinions do both the students express about the evolutionary theory of loneliness?",
+
+                    "instruction": "Choose TWO letters, A-E.",
+
+                    "options": [
+                        "A. It has little practical relevance.",
+                        "B. It needs further investigation.",
+                        "C. It is misleading.",
+                        "D. It should be more widely accepted.",
+                        "E. It is difficult to understand."
+                    ],
+
+                    "answer": [
+                        "A",
+                        "B"
+                    ],
+
+                    "marks": 2
+                },
+                {
+                    "number": 27,
+
+                    "display_number": "27",
+                    
+                    "type": "multiple_choice",
+
+                    "instruction": "Choose the correct letter, A, B or C.",
+
+                    "title": "Loneliness and mental health",
+
+                    "question": "When comparing loneliness to depression, the students",
+
+                    "options": [
+                        "A. doubt that there will ever be a medical cure for loneliness.",
+                        "B. claim that the link between loneliness and mental health is overstated.",
+                        "C. express frustration that loneliness is not taken more seriously."
+                    ],
+
+                    "answer": "A",
+
+                    "marks": 1
+
+                },
+                {
+                    "number": 28,
+
+                    "display_number": "28",
+                    
+                    "type": "multiple_choice",
+
+                    "question": "Why do the students decide to start their presentation with an example from their own experience?",
+
+                    "options": [
+                        "A. to explain how difficult loneliness can be",
+                        "B. to highlight a situation that most students will recognise",
+                        "C. to emphasise that feeling lonely is more common for men than women"
+                    ],
+
+                    "answer": "B",
+
+                    "marks": 1
+
+                },
+                {
+                    "number": 29,
+
+                    "display_number": "29",
+                    
+                    "type": "multiple_choice",
+
+                    "question": "The students agree that talking to strangers is a good strategy for dealing with loneliness because",
+
+                    "options": [
+                        "A. it creates a sense of belonging.",
+                        "B. it builds self-confidence.",
+                        "C. it makes people feel more positive."
+                    ],
+
+                    "answer": "A",
+
+                    "marks": 1
+
+                },
+                {
+                    "number": 30,
+
+                    "display_number": "30",
+                    
+                    "type": "multiple_choice",
+
+                    "question": "The students find it difficult to understand why solitude is considered to be",
+
+                    "options": [
+                        "A. similar to loneliness.",
+                        "B. necessary for mental health.",
+                        "C. an enjoyable experience."
+                    ],
+
+                    "answer": "C",
+
+                    "marks": 1
+
+                }
+                
+
+            ]
+
+        },
+        {
+            "part": 4,
+            "type": "formatted_summary",
+            "instruction": "Complete the notes below. Write ONE WORD ONLY for each answer.",
+
+            "content": [
+
+                {
+                    "type": "heading",
+                    "text": "Reclaiming Urban Rivers"
+                },
+
+                {
+                    "type": "subheading",
+                    "text": "Historical background"
+                },
+
+                {
+                    "type": "bullet",
+                    "items": [
+
+                        [
+                            "Nearly all major cities were built on a river."
+                        ],
+
+                        [
+                            "Rivers were traditionally used by city dwellers for transport, fishing or recreation."
+                        ]
+
+                    ]
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "Industrial development and rising populations later led to:"
+                        ]
+                    ]
+                },
+                {
+                    "type": "sub_bullet",
+                    "items": [
+                        [
+                            "more sewage from houses being discharged into the river"
+                        ],
+                        [
+                            "pollution from ",
+                            {
+                                "question": 31
+                            },
+                            " on the river bank."
+                        ]
+                    ]
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "In 1957, the River Thames in London was declared biologically ",
+                            {
+                                "question": 32
+                            },
+                            "."
+                        ]
+                    ]
+                },
+                {
+                    "type": "subheading",
+                    "text": "Recent improvements"
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "Seals and even a ",
+                            {
+                                "question": 33
+                            },
+                            " have been seen in the River Thames."
+                        ]
+                    ]
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "Riverside warehouses are converted to restaurants and ",
+                            {
+                                "question": 34
+                            },
+                            "."
+                        ]
+                    ]
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "In Los Angeles, there are plans to: "
+                        ]
+                    ]
+                },
+                {
+                    "type": "sub_bullet",
+                    "items": [
+                        [
+                            "build a riverside ",
+                            {
+                                "question": 35
+                            },
+                            " ."
+                        ],
+                        [
+                            "Display ",
+                            {
+                                "question": 36
+                            },
+                            " projects."
+                        ]
+                    ]
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "In Paris, ",
+                            {
+                                "question": 37
+                            },
+                            " are created on the sides of the river every summer."
+                        ]
+                    ]
+                },
+                {
+                    "type": "subheading",
+                    "text": "Transport possibilities"
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "Over 2 billion passengers already travel by ",
+                            {
+                                "question": 38
+                            },
+                            " in cities around the world."
+                        ]
+                    ]
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "Changes in shopping habits mean the number of deliveries that are made is increasing."
+                        ]
+                    ]
+                },
+                {
+                    "type": "bullet",
+                    "items": [
+                        [
+                            "Instead of road transport, goods could be transported by large freight barges and electric ",
+                            {
+                                "question": 39
+                            },
+                            " or, in future, by ",
+                            {
+                                "question": 40
+                            },
+                            " ."
+                        ]
+                    ]
+                }
+
+
+
+            ],
+
+            "answers": [
+
+                        {
+                            "number": 31,
+                            "answer": "factories"
+                        },
+
+                        {
+                            "number": 32,
+                            "answer": "dead"
+                        },
+
+                        {
+                            "number": 33,
+                            "answer": "whale"
+                        },
+
+                        {
+                            "number": 34,
+                            "answer": "apartments"
+                        },
+                        {
+                            "number": 35,
+                            "answer": "park"
+                        },
+                        {
+                            "number": 36,
+                            "answer": "art"
+                        },
+                        {
+                            "number": 37,
+                            "answer": "beaches"
+                        },
+                        {
+                            "number": 38,
+                            "answer": "ferry"
+                        },
+                        {
+                            "number": 39,
+                            "answer": "bikes"
+                        },
+                        {
+                            "number": 40,
+                            "answer": "drone"
+                        }
+
+                    ],
+
+                    "marks": 10
+        }
+
+    ]
+
+
+    
+
+}

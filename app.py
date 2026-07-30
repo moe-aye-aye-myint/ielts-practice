@@ -291,6 +291,52 @@ def result():
         answers=[]
     )
 
+@app.route('/listening-test')
+def listening_list():
+
+    with open('data/listening_tests.json') as file:
+        tests = json.load(file)
+
+    return render_template(
+        'listening_list.html',
+        tests=tests
+    )
+
+@app.route('/listening-instructions/<test_id>')
+def listening_instructions(test_id):
+
+    with open(f'data/{test_id}.json') as file:
+        test = json.load(file)
+
+    return render_template(
+        'listening_instructions.html',
+        test=test
+    )
+
+@app.route('/listening/<test_id>')
+@login_required
+def listening(test_id):
+
+    free_tests = [
+        "listening_test1"
+    ]
+
+    if (
+        test_id not in free_tests
+        and current_user.membership != "premium"
+    ):
+
+        return redirect(
+            url_for("upgrade")
+        )
+
+    with open(f'data/{test_id}.json') as file:
+        test = json.load(file)
+
+    return render_template(
+        'listening.html',
+        test=test
+    )
 
 @app.route("/make-premium/<int:user_id>")
 def make_premium(user_id):
@@ -411,9 +457,245 @@ def approve_payment(id):
 
     return "Payment approved successfully!"
 
+
+
+import json
+import os
+from flask import request, render_template
+
+
+@app.route("/submit-listening/<test_id>", methods=["POST"])
+@login_required
+def submit_listening(test_id):
+
+    print(request.form)
+
+    # Load listening test JSON
+    path = os.path.join(
+    app.root_path,
+    "data",
+    f"{test_id}.json"
+    )
+
+    with open(path, "r", encoding="utf-8") as f:
+        test = json.load(f)
+
+
+    score = 0
+    answers = []
+
+
+    # Create answer lookup
+    answer_key = {}
+
+
+    answer_key = {}
+    marks_key = {}
+
+    for part in test["parts"]:
+
+        # Part 1 completion
+        if part["part"] == 1:
+
+            for ans in part["content"].get("answers", []):
+
+                qid = str(ans["number"])
+
+                answer_key[qid] = ans["answer"]
+                marks_key[qid] = 1
+
+
+        # Part 2 and Part 3
+        elif part["part"] in [2, 3]:
+
+            for q in part["questions"]:
+
+                # Multiple choice multiple
+
+                if q.get("type") == "multiple_choice_multiple":
+
+                    qid = "-".join(
+
+                        [str(x) for x in q["numbers"]]
+
+                    )
+
+                    answer_key[qid] = q["answer"]
+
+                # Normal multiple choice
+
+                else:
+
+                    answer_key[str(q["number"])] = q["answer"]
+
+
+        # Part 4 completion
+        elif part["part"] == 4:
+
+            for ans in part.get("answers", []):
+
+                qid = str(ans["number"])
+
+                answer_key[qid] = ans["answer"]
+                marks_key[qid] = 1
+
+
+
+    # Check every answer
+    for qid, correct_answer in answer_key.items():
+
+        selected_answers = request.form.getlist(
+            f"question_{qid}"
+        )
+
+
+        # Multiple choice multiple (2 answers, 2 marks)
+        if isinstance(correct_answer, list):
+
+            user_answer = ",".join(
+                sorted(
+                    [
+                        x.strip().upper()
+                        for x in selected_answers
+                    ]
+                )
+            )
+
+
+            correct = ",".join(
+                sorted(
+                    [
+                        x.strip().upper()
+                        for x in correct_answer
+                    ]
+                )
+            )
+
+
+            # Both answers must match
+            is_correct = (
+                user_answer == correct
+            )
+
+
+            if is_correct:
+                # IELTS gives 2 marks for two correct answers
+                score += len(correct_answer)
+
+
+
+        # Single answer questions
+        else:
+
+            user_answer = request.form.get(
+                f"question_{qid}",
+                ""
+            ).strip().upper()
+
+
+            correct = str(correct_answer).strip().upper()
+
+
+            is_correct = (
+                user_answer == correct
+            )
+
+
+            if is_correct:
+                score += 1
+
+
+
+        answers.append({
+
+            "id": qid,
+
+            "user_answer":
+                user_answer
+                if user_answer
+                else "(No answer)",
+
+            "correct_answer":
+                correct,
+
+            "is_correct":
+                is_correct
+
+        })
+
+
+
+    total = 0
+
+    for qid, correct_answer in answer_key.items():
+
+        if isinstance(correct_answer, list):
+            total += len(correct_answer)
+
+        else:
+            total += 1
+
+
+
+    # IELTS Listening Band Conversion
+
+    if score >= 39:
+        band = "9.0"
+
+    elif score >= 37:
+        band = "8.5"
+
+    elif score >= 35:
+        band = "8.0"
+
+    elif score >= 32:
+        band = "7.5"
+
+    elif score >= 30:
+        band = "7.0"
+
+    elif score >= 26:
+        band = "6.5"
+
+    elif score >= 23:
+        band = "6.0"
+
+    elif score >= 18:
+        band = "5.5"
+
+    elif score >= 16:
+        band = "5.0"
+
+    elif score >= 13:
+        band = "4.5"
+
+    elif score >= 10:
+        band = "4.0"
+
+    elif score >= 8:
+        band = "3.5"
+
+    elif score >= 6:
+        band = "3.0"
+
+    elif score >= 4:
+        band = "2.5"
+
+    else:
+        band = "0-2.0"
+
+
+
+    return render_template(
+        "listening_result.html",
+        score=score,
+        total=total,
+        band=band,
+        answers=answers
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)
-
 
 
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+IELTS Listening Tests
+</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+<div class="logo">
+IELTS Master
+</div>
+
+
+</nav>
+
+
+
+<section class="categories">
+
+
+<h1>
+Choose a Listening Test
+</h1>
+
+
+
+<div class="card-container">
+
+
+{% for test in tests %}
+
+
+<div class="test-card">
+
+
+<h3>
+
+{{ test.title }}
+
+
+{% if test.id != "listening_test1" %}
+
+<span class="premium-badge">
+    🔒 Premium
+</span>
+
+{% endif %}
+
+
+</h3>
+
+
+
+<p>
+
+Practice IELTS Listening with computer-based exam interface.
+
+</p>
+
+
+
+<a href="/listening-instructions/{{ test.id }}">
+    Start Test
+</a>
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+</section>
+
+
+</body>
+
+</html>

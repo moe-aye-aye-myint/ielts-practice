@@ -1767,3 +1767,558 @@ Question Navigation
     pointer-events: none;
 
 }
+/* Listening Test */
+
+.listening-test-container {
+
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+
+}
+
+
+.test-header {
+
+    text-align:center;
+    margin-bottom:30px;
+
+}
+
+
+.audio-section {
+
+    background:#f4f4f4;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    margin-bottom:30px;
+
+}
+
+
+audio {
+
+    width:80%;
+
+}
+
+
+
+.question-card {
+
+    background:white;
+    padding:20px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+
+}
+
+
+.answer-box {
+
+    width:80%;
+
+    padding:10px;
+
+    font-size:16px;
+
+}
+
+
+.question-number:hover {
+
+    transform:scale(1.05);
+
+}
+.listening-test-container {
+
+    width:90%;
+    margin:auto;
+
+}
+
+
+
+.audio-section {
+
+    height:60px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.audio-section audio {
+
+    width:300px;
+
+}
+
+
+
+.question-area {
+
+    min-height:600px;
+
+    width:100%;
+
+}
+
+
+
+.part-section {
+
+    width:100%;
+
+}
+
+
+
+.question-navigation {
+
+    width:100%;
+
+    text-align:center;
+
+    padding:15px 0;
+
+    margin-top:30px;
+
+    background:white;
+
+    border-top:1px solid #ddd;
+
+}
+
+
+
+.question-number {
+
+    width:35px;
+
+    height:35px;
+
+    margin:3px;
+
+}
+
+
+.listening-table {
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:30px;
+
+}
+
+
+
+.listening-table th,
+.listening-table td {
+
+    border:1px solid #333;
+
+    padding:15px;
+
+    text-align:center;
+
+}
+
+
+
+.listening-table th {
+
+    font-weight:bold;
+
+}
+.question-navigation {
+
+    text-align:center;
+    margin-top:30px;
+    padding:15px;
+
+}
+
+.submit-area {
+
+    display:block;
+
+    text-align:right;
+
+    margin:30px;
+
+}
+
+
+.submit-button {
+
+    display:inline-block;
+
+    padding:12px 30px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    position:relative;
+
+    z-index:10;
+
+}
+/* Listening layout fix */
+
+.question-area {
+
+    min-height:700px;
+
+    padding-bottom:50px;
+
+}
+
+
+.submit-area {
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    width:100%;
+
+    margin-top:30px;
+
+    margin-bottom:30px;
+
+}
+
+
+.submit-button {
+
+    padding:12px 35px;
+
+    font-size:16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    position:relative;
+
+    z-index:999;
+
+}
+
+
+.question-navigation {
+
+    position:relative;
+
+    z-index:10;
+
+    background:white;
+
+    padding:15px;
+
+    text-align:center;
+
+    border-top:1px solid #ddd;
+
+}
+
+
+.question-number {
+
+    width:35px;
+
+    height:35px;
+
+    margin:3px;
+
+}
+/* Listening exam layout */
+
+
+.listening-test-container {
+
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/* Scrollable question area */
+
+.question-area {
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding-bottom:180px;
+
+}
+
+
+
+/* Fixed bottom control */
+
+.bottom-panel {
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    background:white;
+
+    border-top:1px solid #ddd;
+
+    padding:10px;
+
+    z-index:1000;
+
+}
+
+
+
+/* Submit button */
+
+.submit-area{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:75px;   /* just above the navigation */
+
+    z-index:1001;
+
+}
+
+
+.submit-button{
+
+    background:#2c7be5;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:12px 28px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.25);
+
+}
+
+.submit-button:hover{
+
+    background:#1b5fc1;
+
+}
+
+/* Question buttons */
+
+
+.question-navigation{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    background:#ffffff;
+
+    border-top:1px solid #ddd;
+
+    padding:10px;
+
+    text-align:center;
+
+    z-index:1000;
+
+}
+
+
+
+.question-number {
+
+    width:35px;
+
+    height:35px;
+
+    margin:3px;
+
+    cursor:pointer;
+
+}
+.question-area{
+
+    overflow-y:auto;
+
+    padding-bottom:120px;
+
+}
+.question-number{
+
+    width:36px;
+    height:36px;
+
+    border:1px solid #999;
+    background:white;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    margin:3px;
+
+    transition:0.2s;
+
+}
+
+
+.question-number:hover{
+
+    background:#e8f2ff;
+
+}
+
+
+.question-number.answered{
+
+    background:#2c7be5;
+
+    color:white;
+
+    border-color:#2c7be5;
+
+}
+
+
+.question-number.current{
+
+    background:#f4b400;
+
+    color:black;
+
+    border-color:#f4b400;
+
+}
+.sub-bullet {
+    margin-left: 40px;
+    list-style-type: "- ";
+}
+.result-container{
+    max-width:900px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.review{
+    margin:20px 0;
+    padding:18px;
+    border-radius:8px;
+    border-left:6px solid #ccc;
+}
+
+.correct-review{
+    background:#eefaf0;
+    border-left-color:#28a745;
+}
+
+.wrong-review{
+    background:#fff3f3;
+    border-left-color:#dc3545;
+}
+
+.question-title{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.correct-answer{
+    color:#28a745;
+    font-weight:bold;
+}
+
+.wrong-answer{
+    color:#dc3545;
+    font-weight:bold;
+}
+
+.result-text{
+    margin-top:10px;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.home-button{
+    display:inline-block;
+    margin-top:30px;
+    padding:12px 24px;
+    background:#007bff;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.home-button:hover{
+    background:#0056b3;
+}
+.reading-layout {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 120px);
+    gap: 0;
+}
+
+
+.passage {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border-right: 1px solid #ccc;
+}
+
+
+.questions {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
