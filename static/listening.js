@@ -99,6 +99,142 @@ if(listeningAudio){
 
 
 }
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+
+let draggedOption = null;
+
+
+
+// Start dragging
+
+document.querySelectorAll(
+".drag-option"
+)
+.forEach(option => {
+
+
+    option.addEventListener(
+    "dragstart",
+    function(){
+
+
+        draggedOption = this;
+
+
+    });
+
+
+});
+
+
+
+
+
+// Allow dropping
+
+document.querySelectorAll(
+".drop-zone"
+)
+.forEach(zone => {
+
+
+
+    zone.addEventListener(
+    "dragover",
+    function(e){
+
+        e.preventDefault();
+
+        this.classList.add("active");
+
+    });
+
+
+
+
+    zone.addEventListener(
+    "dragleave",
+    function(){
+
+        this.classList.remove("active");
+
+    });
+
+
+
+
+
+
+    zone.addEventListener(
+    "drop",
+    function(e){
+
+
+        e.preventDefault();
+
+
+        this.classList.remove("active");
+
+
+
+        if(!draggedOption)
+            return;
+
+
+
+        let answer =
+        draggedOption.dataset.answer;
+
+
+
+        let questionNumber =
+        this.dataset.question;
+
+
+
+        // Save answer for Flask
+
+        document.getElementById(
+            "answer-" + questionNumber
+        ).value = answer;
+
+
+
+
+        // Display answer but keep hidden input
+
+        this.querySelector(
+            ".answer-display"
+        ).innerHTML =
+        "<strong>"
+        + answer +
+        "</strong>";
+
+
+
+
+
+        // Remove option from right side
+
+        draggedOption.remove();
+
+
+
+        draggedOption = null;
+
+
+    });
+
+
+
+});
+
+
+
+});
 // ===============================
 // QUESTION NAVIGATION
 // ===============================

@@ -472,72 +472,66 @@ def submit_listening(test_id):
 
     # Load listening test JSON
     path = os.path.join(
-    app.root_path,
-    "data",
-    f"{test_id}.json"
+        app.root_path,
+        "data",
+        f"{test_id}.json"
     )
 
     with open(path, "r", encoding="utf-8") as f:
         test = json.load(f)
 
-
     score = 0
     answers = []
 
-
     # Create answer lookup
-    answer_key = {}
-
-
     answer_key = {}
     marks_key = {}
 
     for part in test["parts"]:
 
-        # Part 1 completion
-        if part["part"] == 1:
+        # TABLE TYPE
+        if part.get("type") == "table":
 
-            for ans in part["content"].get("answers", []):
+            for ans in part.get("content", {}).get("answers", []):
 
                 qid = str(ans["number"])
-
                 answer_key[qid] = ans["answer"]
                 marks_key[qid] = 1
 
-
-        # Part 2 and Part 3
-        elif part["part"] in [2, 3]:
-
-            for q in part["questions"]:
-
-                # Multiple choice multiple
-
-                if q.get("type") == "multiple_choice_multiple":
-
-                    qid = "-".join(
-
-                        [str(x) for x in q["numbers"]]
-
-                    )
-
-                    answer_key[qid] = q["answer"]
-
-                # Normal multiple choice
-
-                else:
-
-                    answer_key[str(q["number"])] = q["answer"]
-
-
-        # Part 4 completion
-        elif part["part"] == 4:
+        # FORMATTED SUMMARY
+        elif part.get("type") == "formatted_summary":
 
             for ans in part.get("answers", []):
 
                 qid = str(ans["number"])
-
                 answer_key[qid] = ans["answer"]
                 marks_key[qid] = 1
+
+        # MULTIPLE CHOICE
+        elif part.get("type") == "multiple_choice":
+
+            for q in part.get("questions", []):
+
+                if q.get("type") == "matching":
+
+                    for number, answer in q.get("answers", {}).items():
+
+                        qid = str(number)
+                        answer_key[qid] = answer
+                        marks_key[qid] = 1
+
+                elif q.get("type") == "multiple_choice_multiple":
+
+                    qid = "-".join(str(x) for x in q["numbers"])
+
+                    answer_key[qid] = q["answer"]
+                    marks_key[qid] = len(q["answer"])
+
+                else:
+
+                    qid = str(q["number"])
+                    answer_key[qid] = q["answer"]
+                    marks_key[qid] = 1
 
 
 

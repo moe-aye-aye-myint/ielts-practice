@@ -2321,4 +2321,126 @@ audio {
     overflow-y: auto;
     box-sizing: border-box;
 }
+.question-group-title{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-top:30px;
+
+    margin-bottom:10px;
+
+}
+
+.instruction{
+
+    font-style:italic;
+
+    margin-bottom:20px;
+
+}
+.matching-container {
+
+    display:flex;
+
+    gap:40px;
+
+    margin-top:30px;
+
+}
+
+
+
+.matching-questions {
+
+    flex:1;
+
+}
+
+
+
+.matching-options {
+
+    flex:1;
+
+    border-left:1px solid #ccc;
+
+    padding-left:30px;
+
+}
+
+
+
+.matching-question {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.question-text {
+
+    width:300px;
+
+}
+
+
+
+.drop-zone {
+
+    width:100px;
+
+    height:35px;
+
+    border:2px dashed #aaa;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:14px;
+
+}
+
+
+
+.drop-zone.active {
+
+    background:#e8f5e9;
+
+}
+
+
+
+.drag-option {
+
+    padding:12px;
+
+    margin-bottom:12px;
+
+    background:#f2f2f2;
+
+    border-radius:6px;
+
+    cursor:grab;
+
+}
+
+
+
+.drag-option:hover {
+
+    background:#ddd;
+
+}
 

@@ -129,7 +129,6 @@ action="/submit-listening/{{ test.id }}"
 method="POST">
 
 
-
 <!-- QUESTION AREA -->
 
 <div class="question-area">
@@ -335,13 +334,10 @@ id="question-{{ item.question }}"
 
 
 
-
 {% elif part.type == "multiple_choice" %}
 
 
-
 <!-- MULTIPLE CHOICE QUESTIONS -->
-
 
 {% for q in part.questions %}
 
@@ -352,24 +348,37 @@ id="question-{{ q.display_number }}"
 >
 
 
-<p>
+{% if q.title %}
+<h3 class="question-group-title">
+    {{ q.title }}
+</h3>
+{% endif %}
 
+
+
+{% if q.instruction %}
+<p class="instruction">
+    {{ q.instruction }}
+</p>
+{% endif %}
+
+
+
+<p>
 <strong>
 {{ q.display_number }}.
 {{ q.question }}
 </strong>
-
 </p>
+
+
 
 
 
 {% if q.type == "multiple_choice_multiple" %}
 
 
-<p class="instruction">
-{{ q.instruction }}
-</p>
-
+<!-- MULTIPLE ANSWERS -->
 
 
 {% for option in q.options %}
@@ -377,16 +386,13 @@ id="question-{{ q.display_number }}"
 
 <label>
 
-
 <input
 type="checkbox"
 name="question_{{ q.numbers[0] }}-{{ q.numbers[1] }}"
 value="{{ option.split('.')[0] }}"
 >
 
-
 {{ option }}
-
 
 </label>
 
@@ -399,9 +405,125 @@ value="{{ option.split('.')[0] }}"
 
 
 
+{% elif q.type == "matching" %}
+
+
+<!-- MATCHING QUESTIONS -->
+
+<div class="matching-container">
+
+
+    <!-- LEFT SIDE QUESTIONS -->
+
+    <div class="matching-questions">
+
+
+        <h3>
+            {{ q.instruction }}
+        </h3>
+
+
+        {% for item in q.questions %}
+
+
+        <div 
+        class="matching-question"
+        id="question-{{ item.id }}"
+        >
+
+
+            <span class="question-number">
+                {{ item.id }}.
+            </span>
+
+
+            <span class="question-text">
+                {{ item.text }}
+            </span>
+
+
+
+            <div
+            class="drop-zone"
+            data-question="{{ item.id }}"
+            >
+
+
+            <div class="answer-display">
+                Drop answer here
+            </div>
+
+
+            <input
+            type="hidden"
+            name="question_{{ item.id }}"
+            id="answer-{{ item.id }}"
+            value=""
+            >
+
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+
+
+
+    <!-- RIGHT SIDE OPTIONS -->
+
+    <div class="matching-options">
+
+
+        <h3>
+            Options
+        </h3>
+
+
+
+        {% for option in q.options %}
+
+
+        <div
+        class="drag-option"
+        draggable="true"
+        data-answer="{{ option.letter }}"
+        >
+
+
+            <strong>
+                {{ option.letter }}
+            </strong>
+
+
+            {{ option.text }}
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+
+    </div>
+
+
+</div>
+
+
 
 {% else %}
 
+
+<!-- SINGLE ANSWER MULTIPLE CHOICE -->
 
 
 {% for option in q.options %}
@@ -430,17 +552,6 @@ value="{{ option.split('.')[0] }}"
 
 
 
-
-{% endif %}
-
-
-</div>
-
-
-{% endfor %}
-
-
-
 {% endif %}
 
 
@@ -449,6 +560,23 @@ value="{{ option.split('.')[0] }}"
 
 
 {% endfor %}
+
+
+
+{% endif %}  
+<!-- closes part.type == "multiple_choice" -->
+
+
+</div>
+<!-- closes part-section -->
+
+
+{% endfor %}
+<!-- closes for part in test.parts -->
+
+
+</div>
+<!-- closes question-area -->
 
 
 <!-- BOTTOM CONTROL PANEL -->
@@ -582,19 +710,45 @@ Submit Test
 {% elif part.type == "multiple_choice" %}
 
 
-
     {% for q in part.questions %}
 
 
-    <button
-    type="button"
-    class="question-number"
-    id="nav-{{ q.display_number }}"
-    onclick="goToQuestion('{{ q.display_number }}', {{ part.part }})">
+        {% if q.type == "matching" %}
 
-    {{ q.display_number }}
 
-    </button>
+            {% for item in q.questions %}
+
+
+            <button
+            type="button"
+            class="question-number"
+            id="nav-{{ item.id }}"
+            onclick="goToQuestion('{{ item.id }}', {{ part.part }})">
+
+            {{ item.id }}
+
+            </button>
+
+
+            {% endfor %}
+
+
+
+        {% else %}
+
+
+            <button
+            type="button"
+            class="question-number"
+            id="nav-{{ q.display_number }}"
+            onclick="goToQuestion('{{ q.display_number }}', {{ part.part }})">
+
+            {{ q.display_number }}
+
+            </button>
+
+
+        {% endif %}
 
 
     {% endfor %}
